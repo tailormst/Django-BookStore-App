@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Payment - Bookstore{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h2 class="text-center fw-bold mb-4">💳 Payment</h2>
+
+    <div class="mx-auto shadow-sm rounded p-4 bg-white" style="max-width: 600px;">
+        <h4 class="mb-3 border-bottom pb-2">🧾 Order Summary</h4>
+        <table class="table table-borderless">
+            <tbody>
+                {% for item in order.items.all %}
+                <tr>
+                    <td>{{ item.book.title }} × <span class="text-muted">{{ item.quantity }}</span></td>
+                    <td class="text-end">${{ item.get_cost }}</td>
+                </tr>
+                {% endfor %}
+                <tr class="border-top">
+                    <td class="fw-bold">Total</td>
+                    <td class="fw-bold text-success text-end">${{ order.get_total_price }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <form method="post" class="mt-4">
+            {% csrf_token %}
+            <div class="alert alert-warning small" role="alert">
+                🚧 This is a demo payment page. No actual payment will be processed.
+            </div>
+            <button type="submit" class="btn btn-success w-100">Complete Purchase</button>
+        </form>
+
+        <div class="text-center mt-3">
+            <a href="{% url 'cart' %}" class="btn btn-outline-primary mt-2">← Back to Cart</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

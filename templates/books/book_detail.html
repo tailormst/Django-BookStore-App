@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ book.title }} - Bookstore{% endblock %}
+
+{% block content %}
+<div class="row mt-5">
+    <div class="col-md-5">
+        {% if book.cover_image %}
+            <img src="{{ book.cover_image.url }}" alt="{{ book.title }}" class="img-fluid rounded shadow-sm border">
+        {% else %}
+            <div class="d-flex align-items-center justify-content-center bg-light border rounded" style="height: 400px;">
+                <span class="text-muted">No Image Available</span>
+            </div>
+        {% endif %}
+    </div>
+    <div class="col-md-7">
+        <h2 class="mb-3 fw-bold">{{ book.title }}</h2>
+        <ul class="list-unstyled">
+            <li><strong>Author:</strong> {{ book.author }}</li>
+            <li><strong>ISBN:</strong> {{ book.isbn }}</li>
+            <li><strong>Publication Date:</strong> {{ book.publication_date }}</li>
+            <li><strong>Price:</strong> <span class="text-success fw-semibold">${{ book.price }}</span></li>
+        </ul>
+
+        <hr>
+        <h5 class="mt-4">Description:</h5>
+        <p class="text-muted">{{ book.description }}</p>
+
+        <div class="mt-4">
+            <a href="{% url 'add_to_cart' book.id %}" class="btn btn-primary me-2 shadow">Add to Cart</a>
+            <a href="{% url 'book_list' %}" class="btn btn-outline-secondary">Back to Books</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

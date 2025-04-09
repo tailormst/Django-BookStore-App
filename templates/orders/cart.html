@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}Shopping Cart - Bookstore{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h2 class="mb-4 text-center fw-bold">🛒 Your Shopping Cart</h2>
+
+    {% if order and order.items.all %}
+    <div class="table-responsive">
+        <table class="table table-hover align-middle shadow-sm">
+            <thead class="table-light">
+                <tr>
+                    <th scope="col">📘 Book</th>
+                    <th scope="col">💲 Price</th>
+                    <th scope="col">🔢 Quantity</th>
+                    <th scope="col">💰 Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in order.items.all %}
+                <tr>
+                    <td>{{ item.book.title }}</td>
+                    <td>${{ item.book.price }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td><strong>${{ item.get_cost }}</strong></td>
+                </tr>
+                {% endfor %}
+                <tr class="table-secondary">
+                    <td colspan="3" class="text-end fw-bold">Total</td>
+                    <td class="fw-bold text-success">${{ order.get_total_price }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="mt-4 d-flex justify-content-between flex-wrap gap-2">
+        <a href="{% url 'confirm_order' %}" class="btn btn-success px-4 py-2">✅ Confirm Order</a>
+        <a href="{% url 'book_list' %}" class="btn btn-outline-primary px-4 py-2">📚 Continue Shopping</a>
+    </div>
+
+    {% else %}
+    <div class="text-center">
+        <p class="text-muted fs-5">Your cart is currently empty.</p>
+        <a href="{% url 'book_list' %}" class="btn btn-primary">Browse Books</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

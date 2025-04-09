@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Books - Bookstore{% endblock %}
+
+{% block content %}
+<div class="py-5">
+    <h2 class="mb-4 text-center fw-bold">📚 Available Books</h2>
+
+    {% if books %}
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for book in books %}
+        <div class="col">
+            <div class="card h-100 shadow-sm border-0 hover-shadow transition" style="transition: transform 0.3s ease-in-out;">
+                {% if book.cover_image %}
+                <img src="{{ book.cover_image.url }}" class="card-img-top" alt="{{ book.title }}" style="height: 300px; object-fit: cover;">
+                {% else %}
+                <div class="d-flex align-items-center justify-content-center bg-light text-muted" style="height: 300px;">
+                    No Image Available
+                </div>
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ book.title }}</h5>
+                    <p class="card-text text-muted">by {{ book.author }}</p>
+                    <p class="fw-bold text-success">${{ book.price }}</p>
+                </div>
+                <div class="card-footer bg-white border-0 d-flex justify-content-between px-3 pb-3">
+                    <a href="{% url 'book_detail' book.id %}" class="btn btn-sm btn-outline-primary">View Details</a>
+                    <a href="{% url 'add_to_cart' book.id %}" class="btn btn-sm btn-primary">Add to Cart</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="text-center text-muted">No books available at the moment.</p>
+    {% endif %}
+</div>
+{% endblock %}
