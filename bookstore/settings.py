@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-&7qdqis0z76m$-3+1c_c4c1u-m+cn#tjtxw*djops+^pjig-u!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['https://book-lelo.onrender.com']
+ALLOWED_HOSTS = ['book-lelo.onrender.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
