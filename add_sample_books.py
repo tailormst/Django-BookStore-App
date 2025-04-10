@@ -8,7 +8,6 @@ django.setup()
 
 from books.models import Book
 
-# Sample books data - 25 popular books
 sample_books = [
     {
         'title': 'Artificial Intelligence: A Modern Approach',

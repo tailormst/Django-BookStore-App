@@ -13,12 +13,12 @@
                 {% for item in order.items.all %}
                 <tr>
                     <td>{{ item.book.title }} × <span class="text-muted">{{ item.quantity }}</span></td>
-                    <td class="text-end">${{ item.get_cost }}</td>
+                    <td class="text-end">₹{{ item.get_cost }}</td>
                 </tr>
                 {% endfor %}
                 <tr class="border-top">
                     <td class="fw-bold">Total</td>
-                    <td class="fw-bold text-success text-end">${{ order.get_total_price }}</td>
+                    <td class="fw-bold text-success text-end">₹{{ order.get_total_price }}</td>
                 </tr>
             </tbody>
         </table>
