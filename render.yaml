@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: bookstore
+    runtime: python
+    buildCommand: |
+      pip install -r requirements.txt
+      python manage.py collectstatic --noinput
+    startCommand: gunicorn bookstore.wsgi:application
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: bookstore.settings
+      - key: PYTHON_VERSION
+        value: 3.11
+      - key: SECRET_KEY
+        generateValue: true
+      - key: ALLOWED_HOSTS
+        value: your-app-name.onrender.com
+    staticPublishPath: staticfiles
