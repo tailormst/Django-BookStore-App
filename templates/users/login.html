@@ -14,11 +14,11 @@
                 {% csrf_token %}
 
                 <div class="mb-3">
-                    <label for="id_username" class="form-label">Email</label>
-                    {{ form.username|add_class:"form-control" }}
-                    {% if form.username.errors %}
+                    <label for="id_email" class="form-label">Email</label>
+                    {{ form.email|add_class:"form-control" }}
+                    {% if form.email.errors %}
                         <div class="text-danger small mt-1">
-                            {% for error in form.username.errors %}
+                            {% for error in form.email.errors %}
                                 {{ error }}<br>
                             {% endfor %}
                         </div>
