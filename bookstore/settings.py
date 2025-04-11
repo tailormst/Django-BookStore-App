@@ -173,3 +173,6 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 import os
 
 SECRET_KEY = os.environ.get('SECRET_KEY', 'your-default-dev-key')
+
+
+STATIC_URL = '/static/'
